@@ -192,6 +192,7 @@ DEPENDENCIES
   grade_runner
   http
   i18n
+  minitest
   pry
   puma (~> 5.0)
   rspec
