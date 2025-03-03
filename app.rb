@@ -9,7 +9,9 @@ get ("/water/new") do
   erb(:water_calculator)
 end
 
-get ("/water/results")
+get ("/water/results") do
+  erb(:water_results)
+end
 
 
 
