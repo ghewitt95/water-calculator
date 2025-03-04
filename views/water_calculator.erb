@@ -1,20 +1,38 @@
 <h1>Hello <%= @name %>!</h1>
 
-<p>This is a Water Calculator that will estimate the amount of water you'll have to drink today.
-It will take into consideration:</p>
+<p>This is a Water Calculator that will estimate the amount of water you'll have to drink today. It will take into consideration:</p>
 
- <ul>
+<ul>
   <li>Weight</li>
   <li>Activity Level</li>
   <li>Outdoor Temperature (based on your location)</li>
- </ul>
+</ul>
  
- <p>Let's get started!</p> 
+<p>Let's get started!</p>
 
-"Next, enter your weight (in pounds):"
+<form action="/water/results">
+  <input type="hidden" name="name" value="<%= @name %>">
 
-Please enter the amount of minutes exercised today:"
+  <label for="weight">Enter your weight (in pounds)</label>
+  <input type="number" name="weight" id="weight" placeholder="Weight" required>
 
-Now let's take into consideration the weather. What is the current temperature?:"
- 
- Are you currently pregnant or breastfeeding? (yes/no)"
+    <label for="time_exercised">Enter the amount of minutes exercised today</label>
+  <input type="number" name="time_exercised" id="time_exercised" placeholder="Time Exercised" required>
+
+
+    <label for="weather">What is the current temperature?</label>
+  <input type="number" name="weather" id="weather" placeholder="Temperature" required>
+
+
+  <label>Are you currently pregnant or breastfeeding?</label>
+  <div>
+    <input type="radio" name="pregnant" value="yes" id="pregnant_yes">
+    <label for="pregnant_yes">Yes</label>
+  </div>
+  <div>
+    <input type="radio" name="pregnant" value="no" id="pregnant_no" checked>
+    <label for="pregnant_no">No</label>
+  </div>
+
+  <button>See Results!</button>
+</form>
