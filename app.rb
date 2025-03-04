@@ -1,5 +1,9 @@
 require "sinatra"
 require "sinatra/reloader"
+require "http"
+require "json"
+
+
 
 class WaterIntakeCalculator
   attr_accessor :name, :weight, :minutes_exercised, :temperature, :pregnant
@@ -35,6 +39,20 @@ class WaterIntakeCalculator
   end 
 end
 
+def get_weather(city)
+  url = "http://api.weatherstack.com/current?access_key=#{WEATHERSTACK_API_KEY}&query=#{city}"
+  response = HTTP.get(url)
+  weather_data = JSON.parse(response.body)
+
+  if weather_data["current"]
+    celsius = weather_data["current"]["temperature"]
+    fahrenheit = (celsius * 9.0 / 5) + 32  # Convert to Fahrenheit
+    return fahrenheit.round  # Return rounded temperature
+  else
+    return nil
+  end
+end
+
 get("/") do
   erb(:homepage)
 end
@@ -42,6 +60,17 @@ end
 get ("/water/new") do
   @name = params[:name]
   erb(:water_calculator)
+end
+
+get("/weather") do
+  city = params[:city]
+  temperature = get_weather(city)
+
+  if temperature
+    { temperature: temperature }.to_json
+  else
+    { error: "Could not retrieve weather data." }.to_json
+  end
 end
 
 get ("/water/results") do

@@ -1,13 +1,13 @@
 <h1>Hello <%= @name %>!</h1>
 
-<p>This is a Water Calculator that will estimate the amount of water you'll have to drink today. It will take into consideration:</p>
+<p>This is a Water Calculator that will estimate the amount of water you'll have to drink today.</p>
 
 <ul>
   <li>Weight</li>
   <li>Activity Level</li>
   <li>Outdoor Temperature (based on your location)</li>
 </ul>
- 
+
 <p>Let's get started!</p>
 
 <form action="/water/results">
@@ -16,13 +16,16 @@
   <label for="weight">Enter your weight (in pounds)</label>
   <input type="number" name="weight" id="weight" placeholder="Weight" required>
 
-    <label for="time_exercised">Enter the amount of minutes exercised today</label>
+  <label for="time_exercised">Enter the amount of minutes exercised today</label>
   <input type="number" name="time_exercised" id="time_exercised" placeholder="Time Exercised" required>
 
+  <label for="city">Enter Your City:</label>
+  <input type="text" name="city" id="city" placeholder="E.g. New York">
 
-    <label for="weather">What is the current temperature?</label>
+  <button type="button" id="fetch_weather">Get Weather</button>
+
+  <label for="weather">Temperature (°F):</label>
   <input type="number" name="weather" id="weather" placeholder="Temperature" required>
-
 
   <label>Are you currently pregnant or breastfeeding?</label>
   <div>
@@ -36,3 +39,26 @@
 
   <button>See Results!</button>
 </form>
+
+<script>
+  document.getElementById("fetch_weather").addEventListener("click", function() {
+    var city = document.getElementById("city").value;
+    if (!city) {
+      alert("Please enter a city name!");
+      return;
+    }
+
+    fetch(`/weather?city=${city}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.temperature) {
+          document.getElementById("weather").value = data.temperature;
+        } else {
+          alert("Could not fetch weather data. Please enter it manually.");
+        }
+      })
+      .catch(error => {
+        alert("Error fetching weather data.");
+      });
+  });
+</script>
