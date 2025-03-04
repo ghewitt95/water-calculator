@@ -46,8 +46,8 @@ def get_weather(city)
 
   if weather_data["current"]
     celsius = weather_data["current"]["temperature"]
-    fahrenheit = (celsius * 9.0 / 5) + 32  # Convert to Fahrenheit
-    return fahrenheit.round  # Return rounded temperature
+    fahrenheit = (celsius * 9.0 / 5) + 32
+    return fahrenheit.round
   else
     return nil
   end

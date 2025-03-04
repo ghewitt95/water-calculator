@@ -20,22 +20,5 @@ The Daily Water Intake Calculator helps users estimate their daily water intake 
 
 ## Instructions
 
-- To start the program type `ruby daily-water-intake.rb` into the terminal.
 - Follow on screen instructions.
-- Type 'exit' to end the program at anytime.
 
-
-
-
-
-How to Use
-Start the app by running:
-sh
-Copy code
-ruby app.rb
-Open your browser and go to:
-arduino
-Copy code
-http://localhost:4567
-Follow the on-screen instructions to calculate your daily water intake.
-💧 Stay hydrated! 💙
